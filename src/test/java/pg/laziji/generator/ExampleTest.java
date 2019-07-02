@@ -21,11 +21,7 @@ public class ExampleTest {
     @Test
     public void test() {
         generatorService.generateZip(new TableItem[]{
-                TableItem.newBuilder()
-                        .tableName("table1")
-                        .dynamicPathVariable("className", "TableA")
-                        .build(),
-                new TableItem("table2")
-        }, "/home/code.zip");
+                new TableItem("T_PERSON")
+        }, "D:/A_GENERATOR/code.zip");
     }
 }

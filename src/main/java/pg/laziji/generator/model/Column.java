@@ -24,6 +24,7 @@ public class Column {
         typeMap.put("bit", "Boolean");
         typeMap.put("char", "String");
         typeMap.put("varchar", "String");
+        typeMap.put("varchar2", "String");
         typeMap.put("tinytext", "String");
         typeMap.put("text", "String");
         typeMap.put("mediumtext", "String");
@@ -40,6 +41,8 @@ public class Column {
     private Integer columnSize;
     private boolean nullAble;
     private boolean autoIncrement;
+    private boolean ignore;
+    private boolean isPk;
 
 
     public boolean isAutoIncrement() {
@@ -115,5 +118,21 @@ public class Column {
         }
         String type = dataType.toLowerCase().replace("unsigned","").trim();
         return typeMap.getOrDefault(type, "Object");
+    }
+
+    public void setIgnore(boolean ignore){
+        this.ignore = ignore;
+    }
+
+    public boolean getIgnore(){
+        return this.ignore;
+    }
+
+    public void setIsPk(boolean isPk){
+        this.isPk = isPk;
+    }
+
+    public boolean getIsPk(){
+        return this.isPk;
     }
 }

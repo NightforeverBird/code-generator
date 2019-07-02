@@ -1,5 +1,6 @@
 package pg.laziji.generator.service;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import pg.laziji.generator.model.Column;
 import pg.laziji.generator.model.Table;
@@ -21,6 +22,12 @@ public abstract class BaseTableService implements TableService {
     private String password;
 
     protected abstract String getDriverClassName();
+
+    @Value("#{'${generator.ignore-col}'.split(',')}")
+    private List<String> ignoreColList;
+
+    @Value("${generator.pk-name}")
+    private String pkName;
 
     @Override
     public Table getTable(String tableName) throws Exception {
@@ -59,7 +66,31 @@ public abstract class BaseTableService implements TableService {
                 null);
         List<Column> columns = new ArrayList<>();
         while (resultSet.next()) {
+//            boolean ignoreColBoolean = false;
+//            for (String ignore:ignoreColList){
+//                if (StringUtils.equals(resultSet.getString("COLUMN_NAME"), ignore)){
+//                    ignoreColBoolean = true;
+//                    break;
+//                }
+//            }
+//            if (ignoreColBoolean){
+//                continue;
+//            }
+
             Column column = new Column();
+            column.setIgnore(false);
+            for (String ignore:ignoreColList){
+                if (StringUtils.equals(resultSet.getString("COLUMN_NAME"), ignore)){
+                    column.setIgnore(true);
+                    break;
+                }
+            }
+            // 设置其为主键
+            if (StringUtils.equals(resultSet.getString("COLUMN_NAME"), pkName)){
+                column.setIsPk(true);
+            } else {
+                column.setIsPk(false);
+            }
             column.setTableName(resultSet.getString("TABLE_NAME"));
             column.setColumnName(resultSet.getString("COLUMN_NAME"));
             column.setDataType(resultSet.getString("TYPE_NAME"));

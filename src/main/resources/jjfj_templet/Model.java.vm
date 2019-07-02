@@ -1,0 +1,21 @@
+#set ( $sys = ${system} )
+#set ( $dp = ${dynamicPath} )
+#set ( $tpl = ${template} )
+#set ( $package = ${sys.config.get("generator.package")} )
+#set ( $className = ${dp.className} )
+package ${package}.model;
+
+import java.util.Date;
+import lombok.Data;
+
+
+@Data
+public class ${className} extends BaseModel {
+
+#foreach ($column in $table.columns)
+	#if($column.ignore==false)
+		private $column.attributeType $column.attributeName;
+	#end
+#end
+
+}

@@ -1,0 +1,152 @@
+#set ( $sys = ${system} )
+#set ( $dp = ${dynamicPath} )
+#set ( $tpl = ${template} )
+#set ( $package = ${sys.config.get("generator.package")} )
+#set ( $className = ${dp.className} )
+package ${package}.model;
+
+import java.util.*;
+
+public class ${className}Example extends BaseExample {
+    protected String orderByClause;
+
+    protected boolean distinct;
+
+    protected List<Criteria> oredCriteria;
+
+    public static BaseExample getInstance(){
+        return new ${className}Example();
+    }
+
+    public ${className}Example() {
+        oredCriteria = new ArrayList<Criteria>();
+    }
+
+    public void setOrderByClause(String orderByClause) {
+        this.orderByClause = orderByClause;
+    }
+
+    public String getOrderByClause() {
+        return orderByClause;
+    }
+
+    public void setDistinct(boolean distinct) {
+        this.distinct = distinct;
+    }
+
+    public boolean isDistinct() {
+        return distinct;
+    }
+
+    public List<BaseExample.Criteria> getOredCriteria() {
+        return new ArrayList<BaseExample.Criteria>(oredCriteria);
+    }
+
+    public void or(Criteria criteria) {
+        oredCriteria.add(criteria);
+    }
+
+    public Criteria or() {
+        Criteria criteria = createCriteriaInternal();
+        oredCriteria.add(criteria);
+        return criteria;
+    }
+
+    public Criteria createCriteria() {
+        Criteria criteria = createCriteriaInternal();
+        if (oredCriteria.size() == 0) {
+            oredCriteria.add(criteria);
+        }
+        return criteria;
+    }
+
+    protected Criteria createCriteriaInternal() {
+        Criteria criteria = new Criteria();
+        return criteria;
+    }
+
+    public void clear() {
+        oredCriteria.clear();
+        orderByClause = null;
+        distinct = false;
+    }
+
+    public static class Criteria extends BaseExample.Criteria {
+
+        protected Criteria() {
+            super();
+        }
+
+#foreach ($column in $table.columns)#if($column.isPk==false)
+
+        public Criteria and${column.uppercaseAttributeName}IsNull() {
+            addCriterion("$column.columnName is null");
+            return (Criteria) this;
+        }
+
+        public Criteria and${column.uppercaseAttributeName}IsNotNull() {
+            addCriterion("$column.columnName is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria and${column.uppercaseAttributeName}EqualTo($column.attributeType value) {
+            addCriterion("$column.columnName =", value, "$column.attributeName");
+            return (Criteria) this;
+        }
+
+        public Criteria and${column.uppercaseAttributeName}NotEqualTo($column.attributeType value) {
+            addCriterion("$column.columnName <>", value, "$column.attributeName");
+            return (Criteria) this;
+        }
+
+        public Criteria and${column.uppercaseAttributeName}GreaterThan($column.attributeType value) {
+            addCriterion("$column.columnName >", value, "$column.attributeName");
+            return (Criteria) this;
+        }
+
+        public Criteria and${column.uppercaseAttributeName}GreaterThanOrEqualTo($column.attributeType value) {
+            addCriterion("$column.columnName >=", value, "$column.attributeName");
+            return (Criteria) this;
+        }
+
+        public Criteria and${column.uppercaseAttributeName}LessThan($column.attributeType value) {
+            addCriterion("$column.columnName <", value, "$column.attributeName");
+            return (Criteria) this;
+        }
+
+        public Criteria and${column.uppercaseAttributeName}LessThanOrEqualTo($column.attributeType value) {
+            addCriterion("$column.columnName <=", value, "$column.attributeName");
+            return (Criteria) this;
+        }
+
+        #if($column.attributeType=='String')public Criteria and${column.uppercaseAttributeName}Like($column.attributeType value) {
+            addCriterion("$column.columnName like", value, "$column.attributeName");
+            return (Criteria) this;
+        }
+
+        public Criteria and${column.uppercaseAttributeName}NotLike($column.attributeType value) {
+            addCriterion("$column.columnName not like", value, "$column.attributeName");
+            return (Criteria) this;
+        }#end
+
+        public Criteria and${column.uppercaseAttributeName}In(List<$column.attributeType> values) {
+            addCriterion("$column.columnName in", values, "$column.attributeName");
+            return (Criteria) this;
+        }
+
+        public Criteria and${column.uppercaseAttributeName}NotIn(List<$column.attributeType> values) {
+            addCriterion("$column.columnName not in", values, "$column.attributeName");
+            return (Criteria) this;
+        }
+
+        public Criteria and${column.uppercaseAttributeName}Between($column.attributeType value1, $column.attributeType value2) {
+            addCriterion("$column.columnName between", value1, value2, "$column.attributeName");
+            return (Criteria) this;
+        }
+
+        public Criteria and${column.uppercaseAttributeName}NotBetween($column.attributeType value1, $column.attributeType value2) {
+            addCriterion("$column.columnName not between", value1, value2, "$column.attributeName");
+            return (Criteria) this;
+        }#end#end
+    }
+}

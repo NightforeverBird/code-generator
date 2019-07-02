@@ -2,16 +2,19 @@
 generator:
   datasource:
     # mysql or oracle, default mysql
-    type: mysql
-    url: jdbc:mysql://127.0.0.1:3306/example?characterEncoding=utf-8
-    username: root
-    password: root
+    type: oracle
+    url: jdbc:oracle:thin:@192.168.1.120:1521:orcl
+    username: user_jjfj
+    password: user_jjfj
 
-  package: com.g.example
+  package: com.yog.rise
+  ignore-col: del,add,BH
+  pk-name: BH
   template:
-    path: mybatis2
+    path: jjfj_templet
     mapping: |
       Model.java.vm: main/java/{packagePath}/database/model/{className}.java
-      Query.java.vm: main/java/{packagePath}/database/query/{className}Query.java
-      Dao.java.vm: main/java/{packagePath}/database/dao/{className}Dao.java
-      Service.java.vm: main/java/{packagePath}/database/service/{className}Service.java
+      Dao.java.vm: main/java/{packagePath}/database/model/{className}Dao.java
+      Mapper.vm: main/java/{packagePath}/database/model/{className}Mapper.xml
+      Example.java.vm: main/java/{packagePath}/database/model/{className}Example.java
+

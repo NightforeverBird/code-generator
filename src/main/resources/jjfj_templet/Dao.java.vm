@@ -1,0 +1,16 @@
+#set ( $sys = ${system} )
+#set ( $dp = ${dynamicPath} )
+#set ( $tpl = ${template} )
+#set ( $package = ${sys.config.get("generator.package")} )
+#set ( $className = ${dp.className} )
+package ${package}.dao;
+
+import ${package}.model.${className};
+import ${package}.model.${className}Example;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ${className}Dao extends BaseDao<${className}, ${className}Example> {
+
+}
