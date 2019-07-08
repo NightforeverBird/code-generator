@@ -1,0 +1,30 @@
+#set ( $sys = ${system} )
+#set ( $dp = ${dynamicPath} )
+#set ( $tpl = ${template} )
+#set ( $package = ${sys.config.get("generator.package")} )
+#set ( $className = ${dp.className} )
+package ${package}.dao;
+
+import ${package}.model.db.${className};
+
+/**
+ *  代码生成时间：$table.generateDate
+ */
+public class ${className}Dao extends BaseDao<${className}>{
+    /**
+     * 单实例
+     *
+     */
+    public static class Singtonle {
+        private static ${className}Dao instance = new ${className}Dao();
+    }
+
+    /**
+     * 实例操作类
+     *
+     * @return
+     */
+    public static ${className}Dao instance() {
+        return Singtonle.instance;
+    }
+}

@@ -31,6 +31,10 @@ public class GeneratorServiceImpl implements GeneratorService {
     @Value("${generator.datasource.type:mysql}")
     private String datasourceType;
 
+    @Value("${generator.prefix}")
+    private String removePrefix;
+
+
     @Override
     public void generateZip(String[] tableNames, String zipPath) {
         TableItem[] tableItems = new TableItem[tableNames.length];
@@ -48,7 +52,7 @@ public class GeneratorServiceImpl implements GeneratorService {
                 for (TableItem item : tableItems) {
                     generatorCode(TemplateContext.newBuilder()
                             .templateVariables(item.getTemplateVariables())
-                            .table(tableService.getTable(item.getTableName()))
+                            .table(removePrefix, tableService.getTable(item.getTableName()))
                             .dynamicPathVariables(item.getDynamicPathVariables())
                             .build(), zos);
                 }

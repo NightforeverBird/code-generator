@@ -7,13 +7,15 @@ generator:
     username: user_jjfj
     password: user_jjfj
 
-  package: com.yog.rise
+  package: com.zjyc.fgt
   ignore-col: del,add,BH
   pk-name: BH
+  prefix: T_
   template:
     path: jjfj_old
     mapping: |
       Entity.java.vm: main/java/{packagePath}/database/model/{className}.java
+      Dao.java.vm: main/java/{packagePath}/database/dao/{className}Dao.java
 #      Model.java.vm: main/java/{packagePath}/database/model/{className}.java
 #      Dao.java.vm: main/java/{packagePath}/database/model/{className}Dao.java
 #      Mapper.vm: main/java/{packagePath}/database/model/{className}Mapper.xml

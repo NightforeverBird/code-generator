@@ -11,6 +11,7 @@ public class Table {
     private String tableType;
     private String tableComment;
     private List<Column> columns;
+    private String generateDate;
 
     public String getTableName() {
         return tableName;
@@ -53,5 +54,27 @@ public class Table {
 
     public String getLowercaseClassName() {
         return StringUtils.uncapitalize(getClassName());
+    }
+
+    public String getClassNameAndRemovePrefix(int length) {
+        if (tableName == null) {
+            return null;
+        }
+        if (length == 0) {
+            return getClassName();
+        }
+        return WordUtils.capitalizeFully(tableName.substring(length), new char[]{'_'}).replace("_", "");
+    }
+
+    public String getLowercaseClassNameAndRemovePrefix(int length) {
+        return StringUtils.uncapitalize(getClassNameAndRemovePrefix(length));
+    }
+
+    public String getGenerateDate() {
+        return generateDate;
+    }
+
+    public void setGenerateDate(String generateDate) {
+        this.generateDate = generateDate;
     }
 }

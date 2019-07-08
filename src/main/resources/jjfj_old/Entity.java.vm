@@ -3,7 +3,7 @@
 #set ( $tpl = ${template} )
 #set ( $package = ${sys.config.get("generator.package")} )
 #set ( $className = ${dp.className} )
-package ${package}.dao;
+package ${package}.model.db;
 
 import java.util.Date;
 import java.util.List;
@@ -11,8 +11,20 @@ import java.util.List;
 import com.zjyc.fgt.orm.annotations.SqlColumn;
 import com.zjyc.fgt.orm.annotations.SqlTable;
 
+/**
+*  代码生成时间：$table.generateDate
+*/
 @SqlTable(name = "$table.tableName", description = "$table.tableComment")
 public class ${className} extends IModel {
+
+    public static ${className} newInstance(){
+        return new ${className}();
+    }
+
+    public static Class getEntityClass(){
+        return ${className}.class;
+	}
+
     public ${className}() {
     }
 
@@ -33,11 +45,11 @@ public class ${className} extends IModel {
             this.$column.attributeName = $column.attributeName;
             }
 
-    public $column.attributeType f_${column.uppercaseAttributeName}() {
+    public String f_${column.uppercaseAttributeName}() {
             return getFiledName("$column.columnName");
             }
 
-    public String f_${column.uppercaseAttributeName}($column.attributeType $column.attributeName) {
+    public String f_${column.uppercaseAttributeName}(String $column.attributeName) {
             return getFiledName("$column.columnName", $column.attributeName);
             }
 

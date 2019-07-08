@@ -6,7 +6,9 @@ import pg.laziji.generator.model.Column;
 import pg.laziji.generator.model.Table;
 
 import java.sql.*;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public abstract class BaseTableService implements TableService {
@@ -38,6 +40,9 @@ public abstract class BaseTableService implements TableService {
             }
             List<Column> columns = listMetaDataColumn(connection, tableName);
             table.setColumns(columns);
+            java.util.Date date = new Date();
+            DateFormat dateFormat = DateFormat.getDateTimeInstance();
+            table.setGenerateDate(dateFormat.format(date));
             return table;
         }
     }

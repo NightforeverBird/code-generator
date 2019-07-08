@@ -1,6 +1,7 @@
 package pg.laziji.generator.model;
 
 import org.springframework.core.env.Environment;
+import org.springframework.util.StringUtils;
 import pg.laziji.generator.util.ConfigUtils;
 import pg.laziji.generator.util.SpringContextUtils;
 import pg.laziji.generator.util.TemplateUtils;
@@ -90,6 +91,24 @@ public class TemplateContext {
                 context.getDynamicPathVariables().put("lowercaseClassName", table.getLowercaseClassName());
             }
             return this;
+        }
+
+
+        public Builder table(String ignorePreix, Table table) {
+            String className = table.getTableName();
+            ignorePreix = ignorePreix.toUpperCase();
+            if (StringUtils.isEmpty(ignorePreix)
+                    || ignorePreix.length() >= className.length()
+                    || !ignorePreix.equals(className.toUpperCase().substring(0, ignorePreix.length()))){
+                return table(table);
+            } else {
+                if (table != null) {
+                    context.setTable(table);
+                    context.getDynamicPathVariables().put("className", table.getClassNameAndRemovePrefix(ignorePreix.length()));
+                    context.getDynamicPathVariables().put("lowercaseClassName", table.getLowercaseClassNameAndRemovePrefix(ignorePreix.length()));
+                }
+                return this;
+            }
         }
 
         public Builder dynamicPathVariables(Map<String, String> variables) {
