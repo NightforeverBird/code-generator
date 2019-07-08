@@ -112,6 +112,15 @@ public abstract class BaseTableService implements TableService {
 
     private Connection getConnection() throws SQLException, ClassNotFoundException {
         Class.forName(getDriverClassName());
-        return DriverManager.getConnection(url, username, password);
+        java.util.Properties info = new java.util.Properties();
+
+        if (username != null) {
+            info.put("user", username);
+        }
+        if (password != null) {
+            info.put("password", password);
+        }
+        info.put("remarks", "true");
+        return DriverManager.getConnection(url, info);
     }
 }

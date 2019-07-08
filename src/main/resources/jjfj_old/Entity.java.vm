@@ -1,0 +1,47 @@
+#set ( $sys = ${system} )
+#set ( $dp = ${dynamicPath} )
+#set ( $tpl = ${template} )
+#set ( $package = ${sys.config.get("generator.package")} )
+#set ( $className = ${dp.className} )
+package ${package}.dao;
+
+import java.util.Date;
+import java.util.List;
+
+import com.zjyc.fgt.orm.annotations.SqlColumn;
+import com.zjyc.fgt.orm.annotations.SqlTable;
+
+@SqlTable(name = "$table.tableName", description = "$table.tableComment")
+public class ${className} extends IModel {
+    public ${className}() {
+    }
+
+    public ${className}(String _BName) {
+        this.bName = _BName;
+        this.tableName = "$table.tableName";
+    }
+
+#foreach ($column in $table.columns)#if($column.ignore==false)
+    @SqlColumn(name = "$column.columnName", description = "$column.columnComment")
+    public $column.attributeType $column.attributeName;
+
+    public $column.attributeType get${column.uppercaseAttributeName}() {
+            return $column.attributeName;
+            }
+
+    public void set${column.uppercaseAttributeName}($column.attributeType $column.attributeName) {
+            this.$column.attributeName = $column.attributeName;
+            }
+
+    public $column.attributeType f_${column.uppercaseAttributeName}() {
+            return getFiledName("$column.columnName");
+            }
+
+    public String f_${column.uppercaseAttributeName}($column.attributeType $column.attributeName) {
+            return getFiledName("$column.columnName", $column.attributeName);
+            }
+
+#end
+#end
+
+}

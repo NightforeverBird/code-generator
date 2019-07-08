@@ -11,10 +11,11 @@ generator:
   ignore-col: del,add,BH
   pk-name: BH
   template:
-    path: jjfj_templet
+    path: jjfj_old
     mapping: |
-      Model.java.vm: main/java/{packagePath}/database/model/{className}.java
-      Dao.java.vm: main/java/{packagePath}/database/model/{className}Dao.java
-      Mapper.vm: main/java/{packagePath}/database/model/{className}Mapper.xml
-      Example.java.vm: main/java/{packagePath}/database/model/{className}Example.java
+      Entity.java.vm: main/java/{packagePath}/database/model/{className}.java
+#      Model.java.vm: main/java/{packagePath}/database/model/{className}.java
+#      Dao.java.vm: main/java/{packagePath}/database/model/{className}Dao.java
+#      Mapper.vm: main/java/{packagePath}/database/model/{className}Mapper.xml
+#      Example.java.vm: main/java/{packagePath}/database/model/{className}Example.java
 
