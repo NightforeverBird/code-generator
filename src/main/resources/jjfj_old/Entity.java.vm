@@ -17,14 +17,6 @@ import com.zjyc.fgt.orm.annotations.SqlTable;
 @SqlTable(name = "$table.tableName", description = "$table.tableComment")
 public class ${className} extends IModel {
 
-    public static ${className} newInstance(){
-        return new ${className}();
-    }
-
-    public static Class getEntityClass(){
-        return ${className}.class;
-	}
-
     public ${className}() {
     }
 

@@ -21,7 +21,8 @@ public class ExampleTest {
     @Test
     public void test() {
         generatorService.generateZip(new TableItem[]{
-                new TableItem("T_PERSON")
+                new TableItem("SYS_USER"),
+                new TableItem("SYS_USER_INFO")
         }, "D:/A_GENERATOR/code.zip");
     }
 }

@@ -11,6 +11,15 @@ import ${package}.model.db.${className};
  *  代码生成时间：$table.generateDate
  */
 public class ${className}Dao extends BaseDao<${className}>{
+
+    protected Class getEntityType(){
+        return ${className}.class;
+    }
+
+    protected Object getEntityInstance(){
+        return new ${className}();
+    }
+
     /**
      * 单实例
      *

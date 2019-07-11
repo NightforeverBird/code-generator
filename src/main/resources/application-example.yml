@@ -4,8 +4,8 @@ generator:
     # mysql or oracle, default mysql
     type: oracle
     url: jdbc:oracle:thin:@192.168.1.120:1521:orcl
-    username: user_jjfj
-    password: user_jjfj
+    username: user_jjfj1
+    password: user_jjfj1
 
   package: com.zjyc.fgt
   ignore-col: del,add,BH
