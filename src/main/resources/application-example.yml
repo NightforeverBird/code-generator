@@ -8,8 +8,8 @@ generator:
     password: user_jjfj1
 
   package: com.zjyc.fgt
-  ignore-col: del,add,BH
-  pk-name: BH
+  ignore-col: ID,ADDUSER,ADDDATE,UPDATEUSER,UPDATEDATE,ISDELETE,DELETEDATE,DELETEUSER
+  pk-name: ID
   prefix: T_
   template:
     path: jjfj_old
