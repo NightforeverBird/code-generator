@@ -28,7 +28,10 @@ public class ${className} extends IModel {
 #foreach ($column in $table.columns)#if($column.ignore==false)
     @SqlColumn(name = "$column.columnName", description = "$column.columnComment")
     public $column.attributeType $column.attributeName;
+#end
+#end
 
+#foreach ($column in $table.columns)#if($column.ignore==false)
     public $column.attributeType get${column.uppercaseAttributeName}() {
             return $column.attributeName;
             }
